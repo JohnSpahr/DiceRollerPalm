@@ -7,4 +7,4 @@ Should work on almost any Palm PDA.
 
 Created with <a href="https://palmdb.net/app/nsbasic">NSBasic IDE</a> for Palm OS.
 
-<img src="screenshotnew.bmp" alt="scshot"/>
+<img src="scshot" alt="scshot"/>
