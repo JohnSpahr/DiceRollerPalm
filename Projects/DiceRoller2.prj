@@ -1,0 +1,425 @@
+"mdl"
+7
+"DiceRollerPro","appl","John",1075,505,0
+""
+1065
+1065
+"Dice Roller"
+"1.0"
+""
+"bmpfile"
+1
+"Bitmap1065"
+1065
+"..\Bitmaps\diceroller.jpg"
+"mnu"
+2,"Main"
+1031
+2
+"menu"
+1
+"Dice Roller","",1041
+2
+"menu"
+1
+"About","A","",1043
+"Sub Menu1043_click()
+	'show about screen
+	NextForm ~aboutDiceForm~
+End Sub"
+"menu"
+1
+"Quit","Q","",1042
+"Sub Menu1042_click()
+	'close app
+	Stop
+End Sub"
+"menu"
+1
+"Extras","",1032
+1
+"menu"
+1
+"Rand Num Gen","N","",1034
+"Sub Menu1034_click()
+	'show random num gen screen
+	NextForm ~numGenForm~
+End Sub"
+"mnu"
+2,"NumGen"
+1044
+2
+"menu"
+1
+"Num Gen","",1045
+1
+"menu"
+1
+"Quit","Q","",1047
+"Sub Menu1047_click()
+	'go back to main screen
+	NextForm ~diceForm~
+End Sub"
+"menu"
+1
+"Log","",1048
+1
+"menu"
+1
+"Clear","C","",1049
+"Sub Menu1049_click()
+	'clear num gen log
+	numLogTxt.Clear
+End Sub"
+"vew"
+4,1003,#FALSE#,#TRUE#,#TRUE#,0,0,0,160,160,0,#TRUE#,#TRUE#
+"Dice Roller Pro"
+"diceForm"
+"Sub Form1003_Before()
+	'set default field values
+	rollCountTxt.Text = ~1~
+	sidesTxt.Text = ~0~
+	
+	'clear log
+	logTxt.Clear
+	
+	'declare global variable for roll number
+	Global rollNumber as Integer
+End Sub"
+0
+"Sub Form1003_After()
+End Sub"
+"Sub Form1003_Event()
+	'add main menu, handle drawing when menu button pressed...
+	Dim EventType as Integer
+	Dim key as String
+	EventType=GetEventType()
+	If EventType = nsbKeyOrButton Then
+		key = GetKey()
+		If asc(key) = 5 Then
+			MenuDraw ~Main~
+		End If
+	End If
+End Sub"
+0,0,0,0
+"cho"
+1
+#FALSE#,0,#TRUE#
+"obj"
+3
+"cho","twoBtn",1004,4,28,28,28,#TRUE#,0,"2",0,0,0
+""
+"lbl"
+1
+"obj"
+3
+"lbl","Label1005",1005,4,88,11,66,#TRUE#,0,"Number of Rolls:",0,0,0
+""
+"cho"
+1
+#FALSE#,0,#TRUE#
+"obj"
+3
+"cho","fourBtn",1008,32,28,28,28,#TRUE#,0,"4",0,0,0
+""
+"cho"
+1
+#FALSE#,0,#TRUE#
+"obj"
+3
+"cho","sixBtn",1009,60,28,28,28,#TRUE#,0,"6",0,0,0
+""
+"cho"
+1
+#FALSE#,0,#TRUE#
+"obj"
+3
+"cho","eightBtn",1010,88,28,28,28,#TRUE#,0,"8",0,0,0
+""
+"cho"
+1
+#FALSE#,0,#TRUE#
+"obj"
+3
+"cho","tenBtn",1011,116,28,28,28,#TRUE#,0,"10",0,0,0
+""
+"cho"
+1
+#FALSE#,0,#TRUE#
+"obj"
+3
+"cho","twelveBtn",1012,4,56,28,28,#TRUE#,0,"12",0,0,0
+""
+"cho"
+1
+#FALSE#,0,#TRUE#
+"obj"
+3
+"cho","customBtn",1013,60,56,28,44,#TRUE#,0,"Custom:",0,0,0
+""
+"lbl"
+1
+"obj"
+3
+"lbl","Label1014",1014,4,16,11,69,#TRUE#,0,"Number of Sides:",0,0,0
+""
+"fld"
+1
+#TRUE#,#TRUE#,#TRUE#,#FALSE#,#TRUE#,3,#FALSE#,#FALSE#,#TRUE#
+"obj"
+3
+"fld","sidesTxt",1015,108,64,12,36,#TRUE#,0,"",0,0,0
+""
+"cho"
+1
+#FALSE#,0,#TRUE#
+"obj"
+3
+"cho","twentyBtn",1017,32,56,28,28,#TRUE#,0,"20",0,0,0
+""
+"fld"
+1
+#TRUE#,#TRUE#,#TRUE#,#FALSE#,#TRUE#,1,#FALSE#,#FALSE#,#TRUE#
+"obj"
+3
+"fld","rollCountTxt",1018,72,88,12,32,#TRUE#,0,"",0,0,0
+""
+"but"
+1
+#TRUE#,#TRUE#,#TRUE#
+"obj"
+3
+"but","rollBtn",1021,116,104,24,40,#TRUE#,1,"Roll",0,0,0
+"Sub object1021()
+	'get number of rolls inputted by user
+	Dim rollCount as Integer
+	rollCount = val(rollCountTxt.Text)
+	
+	'make sure roll count input is valid
+	If rollCount > 0 Then
+		logTxt.Clear 'clear log
+		
+		'declare our variables
+		Dim rollNum as Integer
+		Dim randNum as Integer
+		Dim customInput as Integer
+		
+		'loop for number of rolls, generate number for each die rolled
+		For rollNum = 1 to rollCount
+			'2-sider
+			If twoBtn.Status = nsbChecked Then
+				randNum = round(Rand()*1,0) + 1
+				logTxt.Add ~[D2] ~ + str(randNum), 0
+			End If
+			
+			'4-sider
+			If fourBtn.Status = nsbChecked Then
+				randNum = round(Rand()*3,0) + 1
+				logTxt.Add ~[D4] ~ + str(randNum), 0
+			End If
+			
+			'6-sider
+			If sixBtn.Status = nsbChecked Then
+				randNum = round(Rand()*5,0) + 1
+				logTxt.Add ~[D6] ~ + str(randNum), 0
+			End If
+			
+			'8-sider
+			If eightBtn.Status = nsbChecked Then
+				randNum = round(Rand()*7,0) + 1
+				logTxt.Add ~[D8] ~ + str(randNum), 0
+			End If
+			
+			'10-sider
+			If tenBtn.Status = nsbChecked Then
+				randNum = round(Rand()*9,0) + 1
+				logTxt.Add ~[D10] ~ + str(randNum), 0
+			End If
+			
+			'12-sider
+			If twelveBtn.Status = nsbChecked Then
+				randNum = round(Rand()*11,0) + 1
+				logTxt.Add ~[D12] ~ + str(randNum), 0
+			End If
+			
+			'20-sider
+			If twentyBtn.Status = nsbChecked Then
+				randNum = round(Rand()*19,0) + 1
+				logTxt.Add ~[D20] ~ + str(randNum), 0
+			End If
+			
+			'user-defined custom die
+			If customBtn.Status = nsbChecked Then
+				customInput = val(sidesTxt.Text) - 1 'get custom input value from field
+				If customInput > 0 Then
+					'if number inputted is greater than 1, go ahead and generate our number
+					randNum = round(Rand()*customInput,0) + 1
+					logTxt.Add ~[D~ + sidesTxt.Text + ~] ~ + str(randNum), 0
+				End If
+			End If
+		Next
+		
+		'show roll number to provide user feedback
+		rollNumber = rollNumber + 1
+		rollNum.Text = ~#~ + str(rollNumber)
+		rollNum.Show 'make sure it's visible!
+	End If
+End Sub"
+"lst"
+2
+5
+""
+"obj"
+3
+"lst","logTxt",1022,4,104,55,108,#TRUE#,0,"",0,0,0
+""
+"lbl"
+1
+"obj"
+3
+"lbl","rollNum",1073,116,132,11,36,#FALSE#,0,"rollnumb",0,0,0
+""
+"vew"
+4,1007,#FALSE#,#TRUE#,#TRUE#,0,0,0,160,160,0,#FALSE#,#TRUE#
+"Random Num Gen"
+"numGenForm"
+"Sub Form1007_Before()
+	'set default field values
+	minTxt.Text = ~1~
+	maxTxt.Text = ~10~
+	
+	'clear log
+	numLogTxt.Clear	
+End Sub"
+0
+"Sub Form1007_After()
+
+End Sub"
+"Sub Form1007_Event()
+	'add main menu, handle drawing when menu button pressed...
+	Dim EventType as Integer
+	Dim key as String
+	EventType=GetEventType()
+	If EventType = nsbKeyOrButton Then
+		key = GetKey()
+		If asc(key) = 5 Then
+			MenuDraw ~NumGen~
+		End If
+	End If
+End Sub"
+0,0,0,0
+"lbl"
+1
+"obj"
+3
+"lbl","Label1050",1050,4,24,11,17,#TRUE#,0,"Min:",0,0,0
+""
+"fld"
+1
+#TRUE#,#TRUE#,#TRUE#,#FALSE#,#TRUE#,7,#FALSE#,#FALSE#,#TRUE#
+"obj"
+3
+"fld","minTxt",1051,28,24,12,64,#TRUE#,0,"",0,0,0
+""
+"fld"
+1
+#TRUE#,#TRUE#,#TRUE#,#FALSE#,#TRUE#,7,#FALSE#,#FALSE#,#TRUE#
+"obj"
+3
+"fld","maxTxt",1053,28,40,12,64,#TRUE#,0,"",0,0,0
+""
+"lbl"
+1
+"obj"
+3
+"lbl","Label1055",1055,4,40,11,21,#TRUE#,0,"Max:",0,0,0
+""
+"but"
+1
+#TRUE#,#TRUE#,#TRUE#
+"obj"
+3
+"but","genBtn",1056,120,32,16,36,#TRUE#,0,"Go!",0,0,0
+"Sub object1056()
+	'declare our beloved variables
+	Dim min as Integer
+	Dim max as Integer
+	Dim rollNum as Integer
+	Dim randNum as Integer
+	
+	'get values from fields
+	min = val(minTxt.Text)
+	max = val(maxTxt.Text)
+	
+	If max > min Then
+		'generate number
+		randNum = round(Rand()*max,0)
+		
+		Do While randNum > max Or randNum < min
+			'loop to catch numbers that are out of bounds
+			randNum = round(Rand()*max,0)	
+		Loop
+		
+		'add final number to log, including range
+		numLogTxt.Add ~[~ + minTxt.Text + ~-~ + maxTxt.Text + ~] ~ + str(randNum), 0
+	End If
+End Sub"
+"lst"
+2
+8
+""
+"obj"
+3
+"lst","numLogTxt",1057,4,60,88,152,#TRUE#,0,"",0,0,0
+""
+"vew"
+4,1059,#FALSE#,#TRUE#,#TRUE#,0,0,0,160,160,0,#FALSE#,#TRUE#
+"About"
+"aboutDiceForm"
+"Sub Form1059_Before()
+	aboutListTxt.Selected = 0
+End Sub"
+0
+""
+""
+0,0,0,0
+"lbl"
+1
+"obj"
+3
+"lbl","Label1060",1060,32,28,11,74,#TRUE#,1,"Dice Roller Pro",0,0,0
+""
+"bmp"
+1
+1065
+"obj"
+3
+"bmp","Bitmap1061",1061,8,28,22,22,#TRUE#,0,"1065",0,0,0
+""
+"lbl"
+1
+"obj"
+3
+"lbl","Label1062",1062,32,40,11,49,#TRUE#,0,"for Palm OS",0,0,0
+""
+"lst"
+2
+4
+"Version 1.0	Created by John Spahr	johnspahr.org	github.com/johnspahr"
+"obj"
+3
+"lst","aboutListTxt",1063,8,76,48,144,#TRUE#,0,"",0,0,0
+"Sub object1063()
+	aboutListTxt.Selected = 0 'disable selection
+End Sub"
+"but"
+1
+#TRUE#,#TRUE#,#TRUE#
+"obj"
+3
+"but","Button1064",1064,108,136,16,44,#TRUE#,0,"Close",0,0,0
+"Sub object1064()
+	'go back to the main form
+	NextForm ~diceForm~
+End Sub"
+"end"
