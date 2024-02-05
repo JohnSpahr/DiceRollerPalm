@@ -5,7 +5,7 @@
 1065
 1065
 "Dice Roller"
-"1.0"
+"1.1"
 ""
 "bmpfile"
 1
@@ -254,7 +254,9 @@ End Sub"
 				If customInput > 0 Then
 					'if number inputted is greater than 1, go ahead and generate our number
 					randNum = round(Rand()*customInput,0) + 1
-					logTxt.Add ~[D~ + sidesTxt.Text + ~] ~ + str(randNum), 0
+					logTxt.Add ~[D~ + str(customInput + 1) + ~] ~ + str(randNum), 0
+				Else
+					MsgBox ~Please enter a custom value between 2-999.~ 'tell user why number couldn't be generated
 				End If
 			End If
 		Next
@@ -263,6 +265,8 @@ End Sub"
 		rollNumber = rollNumber + 1
 		rollNum.Text = ~#~ + str(rollNumber)
 		rollNum.Show 'make sure it's visible!
+	Else
+		MsgBox ~Please enter a valid number of rolls (1-9).~ 'warn user if roll count is invalid
 	End If
 End Sub"
 "lst"
@@ -361,7 +365,9 @@ End Sub"
 		Loop
 		
 		'add final number to log, including range
-		numLogTxt.Add ~[~ + minTxt.Text + ~-~ + maxTxt.Text + ~] ~ + str(randNum), 0
+		numLogTxt.Add ~[~ + str(min) + ~-~ + str(max) + ~] ~ + str(randNum), 0
+	Else
+		MsgBox ~Min is greater than or equal to max!~ 'warn user
 	End If
 End Sub"
 "lst"
@@ -405,7 +411,7 @@ End Sub"
 "lst"
 2
 4
-"Version 1.0	Created by John Spahr	johnspahr.org	github.com/johnspahr"
+"Version 1.1	Created by John Spahr	johnspahr.org	github.com/johnspahr"
 "obj"
 3
 "lst","aboutListTxt",1063,8,76,48,144,#TRUE#,0,"",0,0,0
