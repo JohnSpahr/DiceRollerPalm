@@ -1,17 +1,22 @@
 "mdl"
 7
-"DiceRollerPro","appl","John",1075,505,0
+"DiceRollerPro","appl","John",1076,505,0
 ""
 1065
-1065
+1076
 "Dice Roller"
-"1.1"
+"1.2"
 ""
 "bmpfile"
 1
 "Bitmap1065"
 1065
 "..\Bitmaps\diceroller.jpg"
+"bmpfile"
+1
+"Bitmap1076"
+1076
+"..\Bitmaps\dicerollersmall.JPG"
 "mnu"
 2,"Main"
 1031
@@ -411,7 +416,7 @@ End Sub"
 "lst"
 2
 4
-"Version 1.1	Created by John Spahr	johnspahr.org	github.com/johnspahr"
+"Version 1.2	Created by John Spahr	johnspahr.org	github.com/johnspahr"
 "obj"
 3
 "lst","aboutListTxt",1063,8,76,48,144,#TRUE#,0,"",0,0,0
